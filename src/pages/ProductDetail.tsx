@@ -37,7 +37,7 @@ const ProductDetail = () => {
     }
     
     const message = `Olá, tenho interesse nesta camisa ${product.name}, tamanho ${selectedSize}. Poderia me passar mais informações?`;
-    const whatsappUrl = `https://wa.me/5511999999999?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/5531997234480?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
