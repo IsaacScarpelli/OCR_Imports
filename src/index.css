@@ -124,4 +124,9 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Utility classes */
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105;
+  }
 }

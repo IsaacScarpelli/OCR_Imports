@@ -69,6 +69,10 @@ export const getProductsByCategory = (category: string): Product[] => {
   return products.filter(product => product.category === category);
 };
 
+export const getProductById = (id: string): Product | undefined => {
+  return products.find(product => product.id === id);
+};
+
 export const getCategoryTitle = (category: string): string => {
   const titles: Record<string, string> = {
     home: "Destaques",

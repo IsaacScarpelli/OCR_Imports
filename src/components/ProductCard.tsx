@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -15,10 +16,10 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  const handleWhatsAppClick = (size: string) => {
-    const message = `Olá, tenho interesse nesta camisa ${product.name}, tamanho ${size}. Poderia me passar mais informações?`;
-    const whatsappUrl = `https://wa.me/5511999999999?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
+  const navigate = useNavigate();
+
+  const handleViewDetails = () => {
+    navigate(`/produto/${product.id}`);
   };
 
   return (
@@ -58,23 +59,15 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="space-y-2">
-          <p className="text-sm text-muted-foreground mb-2">Escolha o tamanho:</p>
-          <div className="grid grid-cols-2 gap-2">
-            {product.sizes.map((size) => (
-              <Button
-                key={size}
-                variant="whatsapp"
-                size="sm"
-                onClick={() => handleWhatsAppClick(size)}
-                className="text-xs"
-              >
-                {size} - WhatsApp
-              </Button>
-            ))}
-          </div>
-        </div>
+        {/* Action Button */}
+        <Button
+          onClick={handleViewDetails}
+          variant="default"
+          size="lg"
+          className="w-full hover-scale"
+        >
+          Ver Detalhes
+        </Button>
       </div>
     </div>
   );
