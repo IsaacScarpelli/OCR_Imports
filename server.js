@@ -118,9 +118,7 @@ app.post('/api/create-payment-intent', async (req, res) => {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amountInCents,
       currency: 'brl', // Real brasileiro
-      automatic_payment_methods: {
-        enabled: true,
-      },
+      payment_method_types: ['card'], // Especificar explicitamente métodos de pagamento
       metadata: {
         order_items: JSON.stringify(validatedItems),
         total_brl: totalAmount.toFixed(2)
