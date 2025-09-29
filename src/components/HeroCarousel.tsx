@@ -2,16 +2,18 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 // Import das imagens geradas
 import jerseyBrazil from "@/assets/jersey-brazil.jpg";
 import jerseyRealMadrid from "@/assets/jersey-real-madrid.jpg";
-import jerseyBarcelona from "@/assets/jersey-barcelona.jpg";
-import jerseyBrazilRetro from "@/assets/jersey-brazil-retro.jpg";
+import jerseyArgentina from "@/assets/jersey-argentina.jpg";
+import jerseyFrance from "@/assets/jersey-france.jpg";
 
 const heroSlides = [
   {
     id: 1,
+    productId: "brasil-2024",
     image: jerseyBrazil,
     title: "Nova Camisa da Seleção Brasileira",
     subtitle: "Seja Hexa com estilo! Camisa oficial para Copa do Mundo 2026",
@@ -19,6 +21,7 @@ const heroSlides = [
   },
   {
     id: 2,
+    productId: "real-madrid-2024",
     image: jerseyRealMadrid,
     title: "Real Madrid Home 2024/25",
     subtitle: "O manto sagrado do clube mais vitorioso da Europa",
@@ -26,22 +29,25 @@ const heroSlides = [
   },
   {
     id: 3,
-    image: jerseyBarcelona,
-    title: "FC Barcelona Clássica",
-    subtitle: "Tradição blaugrana em cada detalhe",
-    price: "R$ 289,90",
+    productId: "argentina-2024",
+    image: jerseyArgentina,
+    title: "Argentina Home 2024 - Campeã do Mundo",
+    subtitle: "A camisa dos atuais campeões mundiais e bicampeões da América",
+    price: "R$ 249,90",
   },
   {
     id: 4,
-    image: jerseyBrazilRetro,
-    title: "Brasil Retrô 1970",
-    subtitle: "Relembre o tricampeonato mundial com Pelé",
-    price: "R$ 199,90",
+    productId: "franca-2024",
+    image: jerseyFrance,
+    title: "França Home 2024",
+    subtitle: "Les Bleus - A elegância francesa em campo",
+    price: "R$ 259,90",
   },
 ];
 
 const HeroCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -61,6 +67,11 @@ const HeroCarousel = () => {
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
+  };
+
+  const handleViewDetails = () => {
+    const currentSlideData = heroSlides[currentSlide];
+    navigate(`/produto/${currentSlideData.productId}`);
   };
 
   return (
@@ -105,7 +116,13 @@ const HeroCarousel = () => {
                       Frete Grátis
                     </Badge>
                   </div>
-                  <Button variant="hero" size="lg" className="text-lg px-8">
+                  <Button 
+                    variant="hero" 
+                    size="lg" 
+                    className="text-lg px-8"
+                    onClick={handleViewDetails}
+                    data-testid="button-hero-details"
+                  >
                     Ver Detalhes
                   </Button>
                 </div>

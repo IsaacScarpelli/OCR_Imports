@@ -14,7 +14,7 @@ export const products: Product[] = productsData as Product[];
 
 // Função para filtrar produtos por categoria
 export const getProductsByCategory = (category: string): Product[] => {
-  if (category === "home") return products;
+  if (category === "home") return products.slice(0, 6); // Limita destaques a 6 itens
   return products.filter(product => product.category === category);
 };
 

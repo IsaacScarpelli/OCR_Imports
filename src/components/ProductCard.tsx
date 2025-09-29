@@ -23,7 +23,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
   };
 
   return (
-    <div className="group bg-card rounded-lg shadow-card hover:shadow-hover transition-all duration-300 overflow-hidden animate-fade-in">
+    <div 
+      className="group bg-card rounded-lg shadow-card hover:shadow-hover transition-all duration-300 overflow-hidden animate-fade-in cursor-pointer"
+      onClick={handleViewDetails}
+      data-testid={`card-product-${product.id}`}
+    >
       {/* Image Container */}
       <div className="relative overflow-hidden bg-gradient-card">
         <img
@@ -61,10 +65,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
         {/* Action Button */}
         <Button
-          onClick={handleViewDetails}
           variant="default"
           size="lg"
-          className="w-full hover-scale"
+          className="w-full hover-scale pointer-events-none"
+          data-testid={`button-product-details-${product.id}`}
         >
           Ver Detalhes
         </Button>
