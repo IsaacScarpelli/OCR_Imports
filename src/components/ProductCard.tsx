@@ -1,6 +1,11 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ShoppingCart } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
+import { toast } from "sonner";
 
 export interface Product {
   id: string;
@@ -17,9 +22,26 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const navigate = useNavigate();
+  const { dispatch } = useCart();
+  const [selectedSize, setSelectedSize] = useState<string>("");
 
   const handleViewDetails = () => {
     navigate(`/produto/${product.id}`);
+  };
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!selectedSize) {
+      toast.error("Por favor, selecione um tamanho");
+      return;
+    }
+    
+    dispatch({
+      type: 'ADD_ITEM',
+      payload: { product, size: selectedSize }
+    });
+    
+    toast.success(`${product.name} adicionado ao carrinho!`);
   };
 
   return (
@@ -51,27 +73,49 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </span>
         </div>
 
-        {/* Sizes */}
+        {/* Size Selector */}
         <div className="mb-4">
-          <p className="text-sm text-muted-foreground mb-2">Tamanhos disponíveis:</p>
-          <div className="flex flex-wrap gap-2">
-            {product.sizes.map((size) => (
-              <Badge key={size} variant="outline" className="text-xs">
-                {size}
-              </Badge>
-            ))}
-          </div>
+          <p className="text-sm text-muted-foreground mb-2">Selecione o tamanho:</p>
+          <Select value={selectedSize} onValueChange={setSelectedSize}>
+            <SelectTrigger className="w-full" onClick={(e) => e.stopPropagation()}>
+              <SelectValue placeholder="Escolha um tamanho" />
+            </SelectTrigger>
+            <SelectContent>
+              {product.sizes.map((size) => (
+                <SelectItem key={size} value={size}>
+                  {size}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
 
-        {/* Action Button */}
-        <Button
-          variant="default"
-          size="lg"
-          className="w-full hover-scale pointer-events-none"
-          data-testid={`button-product-details-${product.id}`}
-        >
-          Ver Detalhes
-        </Button>
+        {/* Action Buttons */}
+        <div className="space-y-2">
+          <Button
+            variant="default"
+            size="lg"
+            className="w-full"
+            onClick={handleAddToCart}
+            disabled={!selectedSize}
+            data-testid={`button-add-cart-${product.id}`}
+          >
+            <ShoppingCart className="h-4 w-4 mr-2" />
+            Adicionar ao Carrinho
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            className="w-full pointer-events-auto"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleViewDetails();
+            }}
+            data-testid={`button-product-details-${product.id}`}
+          >
+            Ver Detalhes
+          </Button>
+        </div>
       </div>
     </div>
   );

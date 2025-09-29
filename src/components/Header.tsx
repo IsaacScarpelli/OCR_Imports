@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ShoppingBag } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Menu, X, ShoppingBag, ShoppingCart } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
 
 interface HeaderProps {
   onCategoryClick: (category: string) => void;
@@ -9,6 +12,8 @@ interface HeaderProps {
 
 const Header = ({ onCategoryClick, currentCategory }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const { state } = useCart();
 
   const categories = [
     { id: "home", label: "Home" },
@@ -50,15 +55,52 @@ const Header = ({ onCategoryClick, currentCategory }: HeaderProps) => {
             ))}
           </nav>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </Button>
+          {/* Cart Icon */}
+          <div className="hidden md:flex items-center">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => navigate('/carrinho')}
+              className="relative"
+            >
+              <ShoppingCart className="h-6 w-6" />
+              {state.itemCount > 0 && (
+                <Badge
+                  variant="destructive"
+                  className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
+                >
+                  {state.itemCount}
+                </Badge>
+              )}
+            </Button>
+          </div>
+
+          {/* Mobile Cart and Menu */}
+          <div className="md:hidden flex items-center space-x-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => navigate('/carrinho')}
+              className="relative"
+            >
+              <ShoppingCart className="h-6 w-6" />
+              {state.itemCount > 0 && (
+                <Badge
+                  variant="destructive"
+                  className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
+                >
+                  {state.itemCount}
+                </Badge>
+              )}
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}

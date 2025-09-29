@@ -198,5 +198,37 @@
     "image": "/assets/jersey-croatia.jpg",
     "sizes": ["P", "M", "G", "GG"],
     "category": "selecoes"
+  },
+  {
+    "id": "brasil-retro-70",
+    "name": "Brasil Retrô Copa do Mundo 1970",
+    "price": 179.90,
+    "image": "/assets/jersey-brazil-70.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "retro"
+  },
+  {
+    "id": "brasil-retro-94",
+    "name": "Brasil Retrô Copa do Mundo 1994",
+    "price": 179.90,
+    "image": "/assets/jersey-brazil-retro.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "retro"
+  },
+  {
+    "id": "flamengo-retro-80",
+    "name": "Flamengo Retrô Anos 80",
+    "price": 159.90,
+    "image": "/assets/jersey-flamengo-retro.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "retro"
+  },
+  {
+    "id": "corinthians-retro-90",
+    "name": "Corinthians Retrô Anos 90",
+    "price": 159.90,
+    "image": "/assets/jersey-corinthians-retro.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "retro"
   }
 ]
