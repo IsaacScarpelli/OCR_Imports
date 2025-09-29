@@ -9,7 +9,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2023-10-16',
 });
 
-// Catálogo de produtos para validação segura (deve vir do banco de dados em produção)
+// Catálogo de produtos para validação segura (DEVE VIR DO BANCO DE DADOS EM PRODUÇÃO)
 const PRODUCT_CATALOG = {
   "flamengo-2024": { price: 229.90, name: "Flamengo Home 2024 - Oficial" },
   "palmeiras-2024": { price: 229.90, name: "Palmeiras Home 2024 - Oficial" },
@@ -52,74 +52,4 @@ export default async function handler(req, res) {
     const { items } = req.body;
 
     // Validar entrada
-    if (!items || !Array.isArray(items) || items.length === 0) {
-      return res.status(400).json({ error: 'Itens do carrinho inválidos' });
-    }
-
-    // Calcular total com base no catálogo seguro (server-side)
-    let totalAmount = 0;
-    const validatedItems = [];
-
-    for (const item of items) {
-      const { id, quantity, selectedSize } = item;
-
-      // Validar item existe no catálogo
-      if (!PRODUCT_CATALOG[id]) {
-        return res.status(400).json({ error: `Produto inválido: ${id}` });
-      }
-
-      // Validar quantidade
-      if (!quantity || quantity <= 0 || quantity > 10) {
-        return res.status(400).json({ error: 'Quantidade inválida' });
-      }
-
-      // Validar tamanho
-      const validSizes = ['P', 'M', 'G', 'GG'];
-      if (!validSizes.includes(selectedSize)) {
-        return res.status(400).json({ error: 'Tamanho inválido' });
-      }
-
-      const productPrice = PRODUCT_CATALOG[id].price;
-      const itemTotal = productPrice * quantity;
-      totalAmount += itemTotal;
-
-      validatedItems.push({
-        id,
-        name: PRODUCT_CATALOG[id].name,
-        price: productPrice,
-        quantity,
-        selectedSize,
-        subtotal: itemTotal
-      });
-    }
-
-    // Converter para centavos (moeda menor do Real)
-    const amountInCents = Math.round(totalAmount * 100);
-
-    // Criar PaymentIntent com Stripe
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: amountInCents,
-      currency: 'brl', // Real brasileiro
-      automatic_payment_methods: {
-        enabled: true,
-      },
-      metadata: {
-        order_items: JSON.stringify(validatedItems),
-        total_brl: totalAmount.toFixed(2)
-      }
-    });
-
-    // Retornar client_secret para o frontend
-    res.json({
-      clientSecret: paymentIntent.client_secret,
-      amount: totalAmount,
-      items: validatedItems
-    });
-
-  } catch (error) {
-    console.error('Erro ao criar PaymentIntent:', error);
-    res.status(500).json({ 
-      error: 'Erro interno do servidor ao processar pagamento' 
-    });
-  }
-}
+    if (!items || !Array.isArray(items) || items.length
