@@ -21,8 +21,7 @@ const Cart = () => {
   };
 
   const handleCheckout = () => {
-    // Will be implemented with Stripe integration
-    console.log('Proceeding to checkout...');
+    navigate('/checkout');
   };
 
   if (state.items.length === 0) {
