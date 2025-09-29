@@ -1,7 +1,4 @@
 [
-  /* =========================
-     BRASILEIRÃO (Série A)
-  ========================== */
   {
     "id": "flamengo-2024",
     "name": "Flamengo Home 2024 - Oficial",
@@ -50,10 +47,6 @@
     "sizes": ["P", "M", "G", "GG"],
     "category": "brasileirao"
   },
-
-  /* =========================
-     CLUBES EUROPEUS FAMOSOS
-  ========================== */
   {
     "id": "real-madrid-2024",
     "name": "Real Madrid Home 2024/25",
@@ -126,10 +119,6 @@
     "sizes": ["P", "M", "G", "GG"],
     "category": "ligas"
   },
-
-  /* =========================
-     SELEÇÕES - COPA 2022
-  ========================== */
   {
     "id": "brasil-2024",
     "name": "Brasil Home 2024",
@@ -178,10 +167,6 @@
     "sizes": ["P", "M", "G", "GG"],
     "category": "selecoes"
   },
-
-  /* =========================
-     SELEÇÕES - EURO 2024
-  ========================== */
   {
     "id": "italia-2024",
     "name": "Itália Home 2024",
