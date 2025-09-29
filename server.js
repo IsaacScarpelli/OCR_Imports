@@ -10,14 +10,18 @@ app.use(cors());
 app.use(express.json());
 
 // Inicializar Stripe
+let stripe = null;
 if (!process.env.STRIPE_SECRET_KEY) {
-  console.error('STRIPE_SECRET_KEY não configurada');
-  process.exit(1);
+  console.warn('⚠️  STRIPE_SECRET_KEY não configurada - funcionalidade de pagamento desabilitada');
+  console.warn('   Para habilitar pagamentos, configure as chaves do Stripe:');
+  console.warn('   - STRIPE_SECRET_KEY (chave secreta)');
+  console.warn('   - VITE_STRIPE_PUBLIC_KEY (chave pública)');
+} else {
+  stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: '2023-10-16',
+  });
+  console.log('✅ Stripe configurado com sucesso');
 }
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2023-10-16',
-});
 
 // Catálogo de produtos para validação segura
 const PRODUCT_CATALOG = {
@@ -99,6 +103,14 @@ app.post('/api/create-payment-intent', async (req, res) => {
       });
     }
 
+    // Verificar se Stripe está configurado
+    if (!stripe) {
+      return res.status(503).json({ 
+        error: 'Pagamentos temporariamente indisponíveis - Stripe não configurado',
+        details: 'As chaves de API do Stripe precisam ser configuradas para processar pagamentos'
+      });
+    }
+
     // Converter para centavos (moeda menor do Real)
     const amountInCents = Math.round(totalAmount * 100);
 
@@ -135,6 +147,12 @@ app.post('/api/create-payment-intent', async (req, res) => {
 // Rota para verificar status do pagamento
 app.get('/api/payment-status/:paymentIntentId', async (req, res) => {
   try {
+    if (!stripe) {
+      return res.status(503).json({ 
+        error: 'Verificação de pagamento indisponível - Stripe não configurado' 
+      });
+    }
+
     const { paymentIntentId } = req.params;
     
     const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
@@ -154,5 +172,9 @@ app.get('/api/payment-status/:paymentIntentId', async (req, res) => {
 // Iniciar servidor
 app.listen(PORT, () => {
   console.log(`🚀 Servidor API rodando na porta ${PORT}`);
-  console.log(`✅ Stripe configurado com sucesso`);
+  if (stripe) {
+    console.log(`✅ Stripe configurado com sucesso`);
+  } else {
+    console.log(`⚠️  Stripe não configurado - funcionalidade de pagamento desabilitada`);
+  }
 });
