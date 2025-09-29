@@ -14,8 +14,8 @@ interface CartState {
 
 type CartAction =
   | { type: 'ADD_ITEM'; payload: { product: Product; size: string } }
-  | { type: 'REMOVE_ITEM'; payload: string }
-  | { type: 'UPDATE_QUANTITY'; payload: { id: string; quantity: number } }
+  | { type: 'REMOVE_ITEM'; payload: { productId: string; size: string } }
+  | { type: 'UPDATE_QUANTITY'; payload: { productId: string; size: string; quantity: number } }
   | { type: 'CLEAR_CART' };
 
 const CartContext = createContext<{
@@ -49,8 +49,9 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
     }
 
     case 'REMOVE_ITEM': {
+      const { productId, size } = action.payload;
       const newItems = state.items.filter(item => 
-        !(item.id === action.payload.split('-')[0] && item.selectedSize === action.payload.split('-')[1])
+        !(item.id === productId && item.selectedSize === size)
       );
       const total = newItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
       const itemCount = newItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -59,11 +60,10 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
     }
 
     case 'UPDATE_QUANTITY': {
-      const { id, quantity } = action.payload;
-      const [productId, size] = id.split('-');
+      const { productId, size, quantity } = action.payload;
       
       if (quantity <= 0) {
-        return cartReducer(state, { type: 'REMOVE_ITEM', payload: id });
+        return cartReducer(state, { type: 'REMOVE_ITEM', payload: { productId, size } });
       }
 
       const newItems = state.items.map(item =>

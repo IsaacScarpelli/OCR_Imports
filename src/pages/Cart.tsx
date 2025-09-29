@@ -12,12 +12,12 @@ const Cart = () => {
   const { state, dispatch } = useCart();
   const navigate = useNavigate();
 
-  const updateQuantity = (id: string, newQuantity: number) => {
-    dispatch({ type: 'UPDATE_QUANTITY', payload: { id, quantity: newQuantity } });
+  const updateQuantity = (productId: string, size: string, newQuantity: number) => {
+    dispatch({ type: 'UPDATE_QUANTITY', payload: { productId, size, quantity: newQuantity } });
   };
 
-  const removeItem = (id: string, size: string) => {
-    dispatch({ type: 'REMOVE_ITEM', payload: `${id}-${size}` });
+  const removeItem = (productId: string, size: string) => {
+    dispatch({ type: 'REMOVE_ITEM', payload: { productId, size } });
   };
 
   const handleCheckout = () => {
@@ -86,7 +86,7 @@ const Cart = () => {
                     <Button
                       variant="outline"
                       size="icon"
-                      onClick={() => updateQuantity(`${item.id}-${item.selectedSize}`, item.quantity - 1)}
+                      onClick={() => updateQuantity(item.id, item.selectedSize, item.quantity - 1)}
                     >
                       <Minus className="h-4 w-4" />
                     </Button>
@@ -94,7 +94,7 @@ const Cart = () => {
                     <Button
                       variant="outline"
                       size="icon"
-                      onClick={() => updateQuantity(`${item.id}-${item.selectedSize}`, item.quantity + 1)}
+                      onClick={() => updateQuantity(item.id, item.selectedSize, item.quantity + 1)}
                     >
                       <Plus className="h-4 w-4" />
                     </Button>

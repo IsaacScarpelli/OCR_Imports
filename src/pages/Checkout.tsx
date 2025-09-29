@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useStripe, Elements, PaymentElement, useElements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
 import { useCart } from '@/contexts/CartContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -10,63 +8,9 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { toast } from 'sonner';
 
-// Load Stripe outside of component render
-if (!import.meta.env.VITE_STRIPE_PUBLIC_KEY) {
-  throw new Error('Chave Stripe não configurada');
-}
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
+// Lazy load Stripe components para evitar erros se a chave não estiver configurada
+const StripeCheckoutForm = lazy(() => import('@/components/StripeCheckoutForm'));
 
-const CheckoutForm = () => {
-  const stripe = useStripe();
-  const elements = useElements();
-  const navigate = useNavigate();
-  const { state, dispatch } = useCart();
-  const [isProcessing, setIsProcessing] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!stripe || !elements) {
-      return;
-    }
-
-    setIsProcessing(true);
-
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: `${window.location.origin}/pagamento-sucesso`,
-      },
-    });
-
-    if (error) {
-      toast.error(`Erro no pagamento: ${error.message}`);
-    } else {
-      toast.success('Pagamento realizado com sucesso!');
-      dispatch({ type: 'CLEAR_CART' });
-      navigate('/pagamento-sucesso');
-    }
-
-    setIsProcessing(false);
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="bg-muted/20 p-4 rounded-lg border">
-        <PaymentElement />
-      </div>
-      <Button
-        type="submit"
-        size="lg"
-        className="w-full"
-        disabled={!stripe || isProcessing}
-      >
-        <Lock className="h-4 w-4 mr-2" />
-        {isProcessing ? 'Processando...' : `Pagar R$ ${state.total.toFixed(2)}`}
-      </Button>
-    </form>
-  );
-};
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -200,17 +144,15 @@ const Checkout = () => {
                 <CardTitle>Informações de Pagamento</CardTitle>
               </CardHeader>
               <CardContent>
-                <Elements 
-                  stripe={stripePromise} 
-                  options={{ 
-                    clientSecret,
-                    appearance: {
-                      theme: 'stripe',
-                    },
-                  }}
-                >
-                  <CheckoutForm />
-                </Elements>
+                {import.meta.env.VITE_STRIPE_PUBLIC_KEY ? (
+                  <Suspense fallback={<div className="flex justify-center p-4">Carregando pagamento...</div>}>
+                    <StripeCheckoutForm clientSecret={clientSecret} />
+                  </Suspense>
+                ) : (
+                  <div className="text-center p-8 text-muted-foreground">
+                    Sistema de pagamento não configurado
+                  </div>
+                )}
               </CardContent>
             </Card>
           </div>
