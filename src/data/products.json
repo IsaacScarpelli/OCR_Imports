@@ -1,0 +1,234 @@
+[
+  {
+    "id": "flamengo-2024",
+    "name": "Flamengo Home 2024 - Oficial",
+    "price": 229.90,
+    "image": "/assets/jersey-flamengo.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "brasileirao"
+  },
+  {
+    "id": "palmeiras-2024",
+    "name": "Palmeiras Home 2024 - Oficial",
+    "price": 229.90,
+    "image": "/assets/jersey-palmeiras.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "brasileirao"
+  },
+  {
+    "id": "corinthians-2024",
+    "name": "Corinthians Home 2024 - Oficial",
+    "price": 229.90,
+    "image": "/assets/jersey-corinthians.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "brasileirao"
+  },
+  {
+    "id": "sao-paulo-2024",
+    "name": "São Paulo FC Home 2024 - Oficial",
+    "price": 229.90,
+    "image": "/assets/jersey-saopaulo.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "brasileirao"
+  },
+  {
+    "id": "gremio-2024",
+    "name": "Grêmio Home 2024 - Oficial",
+    "price": 219.90,
+    "image": "/assets/jersey-gremio.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "brasileirao"
+  },
+  {
+    "id": "internacional-2024",
+    "name": "Internacional Home 2024 - Oficial",
+    "price": 219.90,
+    "image": "/assets/jersey-inter.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "brasileirao"
+  },
+  {
+    "id": "real-madrid-2024",
+    "name": "Real Madrid Home 2024/25",
+    "price": 299.90,
+    "image": "/assets/jersey-real-madrid.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "ligas"
+  },
+  {
+    "id": "barcelona-2024",
+    "name": "FC Barcelona Home 2024/25",
+    "price": 289.90,
+    "image": "/assets/jersey-barcelona.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "ligas"
+  },
+  {
+    "id": "bayern-2024",
+    "name": "Bayern de Munique Home 2024/25",
+    "price": 289.90,
+    "image": "/assets/jersey-bayern.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "ligas"
+  },
+  {
+    "id": "psg-2024",
+    "name": "Paris Saint-Germain Home 2024/25",
+    "price": 299.90,
+    "image": "/assets/jersey-psg.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "ligas"
+  },
+  {
+    "id": "man-city-2024",
+    "name": "Manchester City Home 2024/25",
+    "price": 299.90,
+    "image": "/assets/jersey-mancity.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "ligas"
+  },
+  {
+    "id": "liverpool-2024",
+    "name": "Liverpool Home 2024/25",
+    "price": 289.90,
+    "image": "/assets/jersey-liverpool.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "ligas"
+  },
+  {
+    "id": "chelsea-2024",
+    "name": "Chelsea Home 2024/25",
+    "price": 289.90,
+    "image": "/assets/jersey-chelsea.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "ligas"
+  },
+  {
+    "id": "juventus-2024",
+    "name": "Juventus Home 2024/25",
+    "price": 289.90,
+    "image": "/assets/jersey-juventus.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "ligas"
+  },
+  {
+    "id": "milan-2024",
+    "name": "AC Milan Home 2024/25",
+    "price": 289.90,
+    "image": "/assets/jersey-milan.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "ligas"
+  },
+  {
+    "id": "brasil-2024",
+    "name": "Brasil Home 2024",
+    "price": 249.90,
+    "image": "/assets/jersey-brazil.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "selecoes"
+  },
+  {
+    "id": "argentina-2024",
+    "name": "Argentina Home 2024",
+    "price": 249.90,
+    "image": "/assets/jersey-argentina.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "selecoes"
+  },
+  {
+    "id": "franca-2024",
+    "name": "França Home 2024",
+    "price": 259.90,
+    "image": "/assets/jersey-france.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "selecoes"
+  },
+  {
+    "id": "alemanha-2024",
+    "name": "Alemanha Home 2024",
+    "price": 259.90,
+    "image": "/assets/jersey-germany.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "selecoes"
+  },
+  {
+    "id": "portugal-2024",
+    "name": "Portugal Home 2024",
+    "price": 259.90,
+    "image": "/assets/jersey-portugal.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "selecoes"
+  },
+  {
+    "id": "inglaterra-2024",
+    "name": "Inglaterra Home 2024",
+    "price": 259.90,
+    "image": "/assets/jersey-england.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "selecoes"
+  },
+  {
+    "id": "italia-2024",
+    "name": "Itália Home 2024",
+    "price": 259.90,
+    "image": "/assets/jersey-italy.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "selecoes"
+  },
+  {
+    "id": "espanha-2024",
+    "name": "Espanha Home 2024",
+    "price": 259.90,
+    "image": "/assets/jersey-spain.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "selecoes"
+  },
+  {
+    "id": "holanda-2024",
+    "name": "Holanda Home 2024",
+    "price": 259.90,
+    "image": "/assets/jersey-netherlands.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "selecoes"
+  },
+  {
+    "id": "croacia-2024",
+    "name": "Croácia Home 2024",
+    "price": 259.90,
+    "image": "/assets/jersey-croatia.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "selecoes"
+  },
+  {
+    "id": "brasil-retro-70",
+    "name": "Brasil Retrô Copa do Mundo 1970",
+    "price": 179.90,
+    "image": "/assets/jersey-brazil-70.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "retro"
+  },
+  {
+    "id": "brasil-retro-94",
+    "name": "Brasil Retrô Copa do Mundo 1994",
+    "price": 179.90,
+    "image": "/assets/jersey-brazil-retro.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "retro"
+  },
+  {
+    "id": "flamengo-retro-80",
+    "name": "Flamengo Retrô Anos 80",
+    "price": 159.90,
+    "image": "/assets/jersey-flamengo-retro.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "retro"
+  },
+  {
+    "id": "corinthians-retro-90",
+    "name": "Corinthians Retrô Anos 90",
+    "price": 159.90,
+    "image": "/assets/jersey-corinthians-retro.jpg",
+    "sizes": ["P", "M", "G", "GG"],
+    "category": "retro"
+  }
+]
